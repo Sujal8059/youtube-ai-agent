@@ -1,0 +1,33 @@
+name: YouTube AI Monitoring Agent
+
+on:
+  schedule:
+    # Runs daily at 6:00 AM IST (0:30 AM UTC)
+    - cron: "30 0 * * *"
+  workflow_dispatch:
+    # Allows manual trigger from GitHub Actions tab
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run YouTube monitoring agent
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_PASS: ${{ secrets.GMAIL_PASS }}
+          ALERT_TO: ${{ secrets.ALERT_TO }}
+          SEARCH_KEYWORD: ${{ secrets.SEARCH_KEYWORD }}
+        run: node index.js
