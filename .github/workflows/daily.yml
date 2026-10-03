@@ -29,5 +29,5 @@ jobs:
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           GMAIL_PASS: ${{ secrets.GMAIL_PASS }}
           ALERT_TO: ${{ secrets.ALERT_TO }}
-          SEARCH_KEYWORD: ${{ secrets.SEARCH_KEYWORD }}
+          SEARCH_KEYWORD: "AI agents tutorial"
         run: node index.js
